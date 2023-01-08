@@ -15,8 +15,8 @@ async function scrapeTable() {
     const rowData = {};
 
 
-    const center = $(row).find('td.center').text().trim().replace(/ {6}/g, '');
-    const disciplineTypeAtTime = $(row).find('span.disciplineTypeAtTime').text().trim();
+    const center = $(row).find('td.center').text().trim()
+    const disciplineTypeAtTime = $(row).find('span.disciplineTypeAtTime').text().trim().replace(/  +/g, ' ');
 
     rowData['time'] = center;
     rowData['discipline'] = disciplineTypeAtTime;
