@@ -28,6 +28,7 @@ async function scrapeTable() {
   });
 
   // Return the data
+  delete data[1]
   return data;
 }
 
