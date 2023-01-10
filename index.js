@@ -17,20 +17,22 @@ async function scrapeTable() {
 
     const rowData = {};
 
-
     const center = $(row).find('td.center').text().trim()
-    const disciplineTypeAtTime = $(row).find('span.disciplineTypeAtTime').text().trim().replace(/  +/g, ' ');
-
+    const disciplineTypeAtTime = $(row).find('span.disciplineTypeAtTime').text().trim().replace(/\s+/g, " ").split('|').map(s => s.trim());;
+    
     rowData['time'] = center;
-    rowData['discipline'] = disciplineTypeAtTime;
+    rowData['discipline'] = disciplineTypeAtTime.split('/n').map(s => s.trim());
 
     data[i] = rowData;
   });
 
-  // Return the data
-  delete data[1]
+  delete data[0]
   return data;
 }
+
+scrapeTable().then(data => {
+  fs.writeFileSync('table.json', JSON.stringify(data).replace(/\\n/g, ''));
+});
 
 scrapeTable().then(data => {
   // Write the data to the file
