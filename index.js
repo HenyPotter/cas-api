@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 
 async function scrapeTable() {
-  const response = await axios.get('https://online.atletika.cz/Propozice/propozice/') + casakID;
+  const response = await axios.get('https://online.atletika.cz/Propozice/propozice/');
 
   const $ = cheerio.load(response.data);
   const table = $('table.timeTable.table-striped');
